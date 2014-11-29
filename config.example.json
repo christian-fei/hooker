@@ -1,0 +1,5 @@
+{
+  "task1": {
+    "cmd":"echo 'task1 executed'"
+  }
+}
