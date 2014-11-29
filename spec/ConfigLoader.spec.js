@@ -5,9 +5,10 @@ describe("ConfigLoader", function(){
   var configLoader = new ConfigLoader(new StubReader);
 
   it("should pass", function(){
-    var config = configLoader.load('../config.sample.json');
-
-    expect( config ).toEqual( {} );
+    configLoader.load('../config.sample.json')
+    .then(function(config){
+      expect( config ).toEqual( {} );
+    });
   });
 
 });
