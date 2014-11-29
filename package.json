@@ -1,19 +1,22 @@
 {
   "name": "hooker",
   "version": "1.0.0",
-  "description": "",
+  "description": "Execute command when webhooks call",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node ."
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/christian-fei/hooker.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Christian Fei",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/christian-fei/hooker/issues"
   },
-  "homepage": "https://github.com/christian-fei/hooker"
+  "homepage": "https://github.com/christian-fei/hooker",
+  "dependencies": {
+    "jasmine-node": "^1.14.5"
+  }
 }
