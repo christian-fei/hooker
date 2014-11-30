@@ -4,11 +4,10 @@ describe("ConfigLoader", function(){
 
   var configLoader = new ConfigLoader(new StubReader);
 
-  it("should pass", function(){
+  it("should load config when promise is resolved", function(){
     configLoader.load('../config.sample.json')
     .then(function(config){
       expect( config ).toEqual( {} );
     });
   });
-
 });

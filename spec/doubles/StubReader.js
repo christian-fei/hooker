@@ -4,9 +4,7 @@ module.exports = function(){
 
   self.load = function(){
     var deferred = Q.defer();
-
     deferred.resolve({});
-
     return deferred.promise;
   };
 };
