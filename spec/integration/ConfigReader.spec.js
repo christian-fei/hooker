@@ -1,5 +1,8 @@
 describe("ConfigReader", function() {
   var ConfigReader;
+
+  jasmine.getEnv().defaultTimeoutInterval = 500;
+
   beforeEach(function() {
     ConfigReader = require('../../modules/ConfigReader');
   });
