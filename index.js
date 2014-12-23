@@ -1,6 +1,7 @@
 var http = require('http')
  , url = require('url')
  , querystring = require('querystring')
+ , exec = require('child_process').exec
  , colors = require('colors')
  , ConfigReader = require('./modules/ConfigReader')
  , configReader = new ConfigReader
@@ -35,6 +36,7 @@ function requestListener(req,res){
     return;
   }
   console.log( 'valid request'.green );
+  executeCommandFor(req);
   res.end();
 }
 
@@ -42,6 +44,25 @@ function logRequest(req){
   var origin = req.headers.origin || '';
   var method = req.method;
   console.log(method.magenta + ' request from '.white + origin.green);
+}
+
+function executeCommandFor(req){
+  var command = getCommandFor(req);
+  exec(command,
+    function (error, stdout, stderr) {
+      if( stdout )
+        console.log('stdout: ' + stdout.white);
+      if( stderr )
+        console.log('stderr: ' + stderr.read);
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+  });
+}
+
+function getCommandFor(req){
+  var hook = getHookFor(req);
+  return config.hooks[hook];
 }
 
 function getHookFor(req){
