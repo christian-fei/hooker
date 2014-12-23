@@ -34,11 +34,14 @@ function requestListener(req,res){
 }
 
 function logRequest(req){
-  var origin = req.headers.origin || ''
+  var origin = req.headers.origin || '';
   var method = req.method;
   console.log(method.magenta + ' request from '.white + origin.green);
 }
 
 function isValidRequest(req,config){
-  return req.method.match(/^POST$/) && req.headers.origin && config.allowed_origins.indexOf(req.headers.origin)>=0;
+  var origin = req.headers.origin || '';
+  var method = req.method;
+
+  return method.match(/^POST$/) && origin && config.allowed_origins.indexOf(origin)>=0;
 }
