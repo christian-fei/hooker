@@ -4,7 +4,7 @@ function ConfigLoader(reader){
   self.reader = reader;
 
   self.load = function(){
-    return self.reader.load.apply(arguments);
+    return self.reader.read.apply(arguments);
   };
 };
 

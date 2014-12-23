@@ -4,8 +4,10 @@
   "description": "Execute command when webhooks call",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine-node .",
-    "watch-tests": "jasmine-node . --color --autotest --watch . --growl"
+    "test": "jasmine-node spec/",
+    "unit-test": "jasmine-node spec/unit/",
+    "integration-test": "jasmine-node spec/integration/",
+    "watch-tests": "jasmine-node spec/ --color --autotest --watch . --growl"
   },
   "repository": {
     "type": "git",
