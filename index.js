@@ -44,24 +44,29 @@ function logRequest(req){
   console.log(method.magenta + ' request from '.white + origin.green);
 }
 
+function getHookFor(req){
+  var origin = req.headers.origin || '';
+  var query = url.parse(req.url).query;
+  var queryObject = querystring.parse(query);
+  return queryObject.hook;
+}
 function validateRequest(req,config){
   var errors = [];
   var origin = req.headers.origin || '';
   var method = req.method;
 
-  var query = url.parse(origin+req.url).query;
-  var queryObject = querystring.parse(query);
+  var hook = getHookFor(req);
 
   if(!method.match(/^POST$/))
     errors.push('Request not POST ['+ method +']');
   if(config.allowed_origins.indexOf(origin)<0)
     errors.push('Request from not allowed origin ['+ origin +']');
 
-  if( queryObject.hook == undefined ){
+  if( hook == undefined ){
     errors.push('No hook provided in the query')
   } else {
-    if( !config.hooks[queryObject.hook] )
-      errors.push('Hook not found "'+ queryObject.hook+'"');
+    if( !config.hooks[hook] )
+      errors.push('Hook not found "'+ hook+'"');
   }
 
   return errors;
