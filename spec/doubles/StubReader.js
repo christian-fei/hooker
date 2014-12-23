@@ -4,7 +4,9 @@ module.exports = function(){
 
   self.load = function(){
     var deferred = Q.defer();
-    deferred.resolve({});
+    deferred.resolve({
+      "hook1": "echo 'ok'"
+    });
     return deferred.promise;
   };
 };

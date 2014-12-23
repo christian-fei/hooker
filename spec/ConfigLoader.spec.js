@@ -7,7 +7,7 @@ describe("ConfigLoader", function(){
   it("should load config when promise is resolved", function(){
     configLoader.load('../config.sample.json')
     .then(function(config){
-      expect( config ).toEqual( {} );
+      expect( config ).toEqual( {"hook1": "echo 'ok'"} );
     });
   });
 });

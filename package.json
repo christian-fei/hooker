@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node .",
-    "watch-tests": "jasmine-node . --autotest --watch . --growl"
+    "watch-tests": "jasmine-node . --color --autotest --watch . --growl"
   },
   "repository": {
     "type": "git",
