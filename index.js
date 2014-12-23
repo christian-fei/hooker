@@ -1,4 +1,6 @@
 var http = require('http')
+ , url = require('url')
+ , querystring = require('querystring')
  , colors = require('colors')
  , ConfigReader = require('./modules/ConfigReader')
  , configReader = new ConfigReader
@@ -28,7 +30,7 @@ function requestListener(req,res){
   if( errors.length>0 ){
     res.end();
     errors.forEach(function(error){
-      console.log('>> ' + error.red);
+      console.log('>> ' + JSON.stringify(error).red);
     })
     return;
   }
@@ -47,10 +49,20 @@ function validateRequest(req,config){
   var origin = req.headers.origin || '';
   var method = req.method;
 
-  if(method.match(/^POST$/))
+  var query = url.parse(origin+req.url).query;
+  var queryObject = querystring.parse(query);
+
+  if(!method.match(/^POST$/))
     errors.push('Request not POST ['+ method +']');
   if(config.allowed_origins.indexOf(origin)<0)
     errors.push('Request from not allowed origin ['+ origin +']');
+
+  if( queryObject.hook == undefined ){
+    errors.push('No hook provided in the query')
+  } else {
+    if( !config.hooks[queryObject.hook] )
+      errors.push('Hook not found "'+ queryObject.hook+'"');
+  }
 
   return errors;
 }
