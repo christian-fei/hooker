@@ -8,7 +8,7 @@ module.exports = function(){
   self.read = function(filelocation){
     var deferred = Q.defer();
 
-    fs.readFile(path.join(__dirname,filelocation),'utf8', function(err,data){
+    fs.readFile(path.join(__dirname,'../'+filelocation),'utf8', function(err,data){
       if(err){ 
         return deferred.reject();
       }

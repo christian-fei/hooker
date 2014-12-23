@@ -9,9 +9,16 @@ describe("ConfigReader", function() {
 
   it("should read config.example.json", function(done) {
     configReader = new ConfigReader();
-    configReader.read('../config.example.json')
+    configReader.read('config.example.json')
     .then(function(config){
-      expect( config ).toEqual( {"deploy": "echo 'deploying'"} );
+      expect( config ).toEqual(
+        {
+          "allowed_origins": ["github.com"],
+          "hooks": {
+            "deploy": "echo 'deploying'"
+          }
+        }
+      );
       done();
     });
 
