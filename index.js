@@ -24,9 +24,12 @@ function startServer(){
 
 function requestListener(req,res){
   logRequest(req);
-  if( !isValidRequest(req,config) ){
+  var errors = validateRequest(req,config);
+  if( errors.length>0 ){
     res.end();
-    console.log('invalid request'.red);
+    errors.forEach(function(error){
+      console.log('>> ' + error.red);
+    })
     return;
   }
   console.log( 'valid request'.green );
@@ -39,9 +42,15 @@ function logRequest(req){
   console.log(method.magenta + ' request from '.white + origin.green);
 }
 
-function isValidRequest(req,config){
+function validateRequest(req,config){
+  var errors = [];
   var origin = req.headers.origin || '';
   var method = req.method;
 
-  return method.match(/^POST$/) && origin && config.allowed_origins.indexOf(origin)>=0;
+  if(method.match(/^POST$/))
+    errors.push('Request not POST ['+ method +']');
+  if(config.allowed_origins.indexOf(origin)<0)
+    errors.push('Request from not allowed origin ['+ origin +']');
+
+  return errors;
 }
