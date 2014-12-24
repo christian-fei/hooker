@@ -80,8 +80,10 @@ function validateRequest(req,config){
 
   if(!method.match(/^POST$/))
     errors.push('Request not POST ['+ method +']');
+/*
   if(config.allowed_origins.indexOf(origin)<0)
     errors.push('Request from not allowed origin ['+ origin +']');
+*/
 
   if( hook == undefined ){
     errors.push('No hook provided in the query')
