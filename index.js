@@ -35,7 +35,7 @@ function requestListener(req,res){
     })
     return;
   }
-  console.log( 'valid request'.green + ': ' + req.url );
+  console.log( 'hook: '.green + getHookFor(req).yellow );
   executeCommandFor(req);
   res.end();
 }
