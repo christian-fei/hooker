@@ -35,7 +35,7 @@ function requestListener(req,res){
     })
     return;
   }
-  console.log( 'valid request'.green );
+  console.log( 'valid request'.green + ': ' + req.url );
   executeCommandFor(req);
   res.end();
 }
@@ -48,6 +48,8 @@ function logRequest(req){
 
 function executeCommandFor(req){
   var command = getCommandFor(req);
+  console.log( 'executing'.green );
+  console.log( '  ' + command.white );
   exec(command,
     function (error, stdout, stderr) {
       if( stdout )
